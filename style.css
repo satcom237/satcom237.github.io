@@ -17,10 +17,10 @@ body {
     /* The image used */
     background-image: url("BG/GoldenGate.jpg");
 
-    /* Set a specific height */
-    min-height: 800px;
+    /* Set height to fill the viewport dynamically */
+    height: 100vh;
 
-    /* Create the parallax scrolling effect */
+    /* Restore the parallax effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -87,6 +87,13 @@ li a {
   color: white;
   background-image: linear-gradient(transparent, transparent);
   transition: all 1000s;
+}
+
+/* Remove hover effects for the nohover class */
+.nohover a {
+  pointer-events: none; /* Disables hover and click interactions */
+  color: white; /* Ensures the text color remains consistent */
+  text-decoration: none; /* Removes any underline or hover effects */
 }
 
 /* Code to make navbar transition on scroll(js) */
