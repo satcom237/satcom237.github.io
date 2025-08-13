@@ -4,9 +4,11 @@ html{
 
 body {
   margin: 0;
-  font-size: 14px;
-  font-family: 'Arial', sans-serif;
-  line-height: 20px;
+  font-size: 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #ffffff;
 }
 
 .navlist{
@@ -14,17 +16,15 @@ body {
 }
 
 .parallax {
-    /* The image used */
     background-image: url("BG/GoldenGate.jpg");
-
-    /* Set height to fill the viewport dynamically */
     height: 100vh;
-
-    /* Restore the parallax effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .top {
@@ -40,13 +40,56 @@ body {
   color: white;
 }
 
+.hero-content {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
 .title {
   left: 0;
   line-height: 100px;
   margin: auto;
-  margin-top: 120px;
+  margin-top: -280px;
   position: absolute;
   width: 100%;
+  font-size: 80px;
+  font-weight: 100;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  opacity: 0.9;
+  font-weight: 400;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-card {
+  border-radius: 12px;
+  padding: 32px 48px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 0 auto;
+  display: block;
+}
+
+.tagline {
+  color: #333;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 ul {
@@ -54,10 +97,12 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     position: fixed;
     top: 0;
     width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 li {
@@ -78,15 +123,15 @@ li a {
     transition: all 0.3s ease-out;
 }
 
-.navbar a:hover{
+.navbar a:hover {
     color: #ff9443;
     background-size: 100% 3px, auto;
 }
 
-.nohover a:hover{ /* This disables hover for top-right name */
-  color: white;
-  background-image: linear-gradient(transparent, transparent);
-  transition: all 1000s;
+.nohover a:hover {
+    color: white;
+    background-color: transparent;
+    transform: none;
 }
 
 /* Remove hover effects for the nohover class */
@@ -124,37 +169,89 @@ li a {
 }
 
 #consolebg {
-  background-color: #719d5c;
-  height: 780px; /* size of green bg*/
-  padding-top: 120px;
+  background-color: #4d669c;
+  padding: 80px 20px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #code {
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  width:850px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  padding-top:27px; /* size of white box top*/
-  font-size:30px;
-  background: white;
-  height: 500px;
-  font-family: 'Monaco', 'Courier New';
+  background: #2d2d2d;
+  height: auto;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', monospace;
   text-align: left;
-  font-size:14px;
+  font-size: 14px;
   color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+#code::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: #2d2d2d;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 0 8px;
+}
+
+.window-controls {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  z-index: 1;
+  display: flex;
+  gap: 6px;
+}
+
+.window-controls::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ff5f56;
+  left: 0;
+}
+
+.window-controls::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffbd2e;
+  left: 20px;
+}
+
+.window-controls span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #27c93f;
+  margin-left: 40px;
 }
 
 #console {
-  font-family:Courier;
-  color: #CCCCCC;
-  background: #000000;
-  border-right-style: solid;
-  border-color: lightgrey;
-  border-width: 17px;
-  padding: 10px;
-  padding-bottom: 30px; /* bottom of black console*/
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #e4e4e4;
+  background: #1e1e1e;
+  padding: 24px;
+  border-radius: 8px;
+  line-height: 1.6;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+#console .text, #console .command-prompt {
+  color: #ff9443;
 }
 
 span.answer {
@@ -196,16 +293,12 @@ span.answer {
 }
 
 #resume {
-  background-color: #dddddd7a;
-  padding-top: 70px; /* increase box size*/
-  font-size: 18px;
+  padding: 80px 0;
 }
 
 .tagline {
-  margin: auto;
-  width: 50%;
+  margin: 0;
   padding-bottom: 15px;
-  min-width: 500px;
 }
 
 .dropbtn {
