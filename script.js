@@ -1,31 +1,61 @@
 
-$(window).scroll(function(){
-  $(".top").css("opacity", 1 - $(window).scrollTop() / 100);
-});
+(function(){
+  if (typeof jQuery === 'undefined') {
+    console.warn('jQuery is required for script.js but not found.');
+    return;
+  }
 
-$(window).scroll(function() {
-// 100 = The point you would like to fade the nav in.
+  $(function(){
+    var $win = $(window);
+    var $top = $('.top');
+    var $nav = $('.navlist');
+    var threshold = 100;
+    var ticking = false;
 
-	if ($(window).scrollTop() > 100 ){
+    function updateOnScroll(){
+      var st = $win.scrollTop();
 
- 		$('.navlist').addClass('show');
+      // hero fade
+      var op = 1 - st / threshold;
+      if (op < 0) op = 0;
+      if (op > 1) op = 1;
+      $top.css('opacity', op);
 
-  } else {
+      // navbar show/hide
+      if (st > threshold) {
+        if (!$nav.hasClass('show')) $nav.addClass('show');
+      } else {
+        if ($nav.hasClass('show')) $nav.removeClass('show');
+      }
 
-    $('.navlist').removeClass('show');
+      ticking = false;
+    }
 
- 	};
-});
+    $win.on('scroll', function(){
+      if (!ticking) {
+        window.requestAnimationFrame(updateOnScroll);
+        ticking = true;
+      }
+    });
 
-$('.scroll').on('click', function(e){
-		e.preventDefault()
+    // set initial state
+    updateOnScroll();
 
-  $('html, body').animate({
-      scrollTop : $(this.hash).offset().top
-    }, 1500);
-});
+    // delegated smooth scrolling for links with class "scroll"
+    $(document).on('click', '.scroll', function(e){
+      var hash = this.hash;
+      if (!hash) return;
+      var $target = $(hash);
+      if ($target.length) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: $target.offset().top }, 800);
+      }
+    });
 
-function popup() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
+    // expose popup for inline onclick handlers
+    window.popup = function(){
+      var el = document.getElementById('myPopup');
+      if (el) el.classList.toggle('show');
+    };
+  });
+})();
